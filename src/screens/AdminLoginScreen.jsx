@@ -1,47 +1,50 @@
-import React from "react";
+import React from 'react'
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {  useDispatch, useSelector } from "react-redux";
-import Loader from "../component/Loader";
+import { useAdminLoginMutation } from '../slices/adminApiSlice';
+import { adminSetCredentials } from '../slices/adminAuthSlice';
+import Loader from '../component/Loader';
 import {toast} from 'react-toastify'
 
-const LoginScreen = () => {
+const AdminLoginScreen = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-
+  
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
-    const [login, {isLoading}] = useState()
 
-    const {userInfo} = useSelector((state) => state.auth)
-  
+    const [ adminLogin, {isLoading}] = useAdminLoginMutation();
+    const {adminInfo} = useSelector((state) => state.adminAuth)
+
+
     const handleRegisterClick = () => {
-    
-      navigate('/register');
+  
+        navigate('/admin/register');
     };
 
     const submitHandler = async() =>{
         try {
-            const res = await login({email,password}).unwrap()
-            
-            navigate('/')
+            const res = await adminLogin({email,password}).unwrap()
+            dispatch(adminSetCredentials({...res}));
+            navigate('/admin')
         } catch (err) {
           toast.error(err?.data?.message || err.error);
         }
       }
 
-      useEffect(()=>{
-        if(userInfo){
-          navigate('/')
-        }
-      },[navigate,userInfo])
 
+    useEffect(()=>{
+        if(adminInfo){
+          navigate('/admin')
+        }
+      },[navigate,adminInfo])
 
   return (
     <div className="flex flex-col items-center mt-2 min-h-screen bg-gray-100">
       <div className="w-full max-w-lg mt-20">
         <h1 className="text-4xl font-bold text-center mb-8">
-          Login
+          Admin Login
         </h1>
         <div className="bg-white shadow-md rounded-lg p-8">
           <div className="mb-6">
@@ -86,13 +89,13 @@ const LoginScreen = () => {
 
           <div className="text-center mt-6">
             <p className="text-gray-600 text-sm">
-              New customer ? <span className="font-bold cursor-pointer text-black-100" onClick={handleRegisterClick}>Register</span>
+              New Admin ? <span className="font-bold cursor-pointer text-black-100" onClick={handleRegisterClick}>Register</span>
             </p>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default LoginScreen
+export default AdminLoginScreen
