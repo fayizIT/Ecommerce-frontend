@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {  useDispatch, useSelector } from "react-redux";
-import { useAdminLoginMutation } from '../slices/adminApiSlice';
+import { useAdminLoginMutation } from '../slices/adminapiSlice.js';
 import { adminSetCredentials } from '../slices/adminAuthSlice';
 import Loader from '../component/Loader';
 import {toast} from 'react-toastify'
