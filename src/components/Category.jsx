@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 
 const brands = ['/apple.png', '/realme.png', '/sony.png', '/mi.png', '/samsung.png', '/lg.png'];
 
