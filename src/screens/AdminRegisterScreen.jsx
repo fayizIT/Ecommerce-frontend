@@ -1,21 +1,22 @@
 // import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
-import {  useSelector } from "react-redux";
-
+import {  useDispatch, useSelector } from "react-redux";
+import { useAdminRegisterMutation } from '../slices/adminApiSlice';
+import { adminSetCredentials } from '../slices/adminAuthSlice';
 import Loader from '../component/Loader';
 import {toast} from 'react-toastify'
 
 const AdminRegisterScreen = () => {
     const navigate = useNavigate()
-    
+    const dispatch = useDispatch();
     const [name,setName] =useState('')
     const [email,setEmail] =useState('')
     const [password,setPassword] =useState('')
     const [confirmPassword,setConfirmPassword] =useState('')
     const [key,setKey] = useState('')
 
-    const [adminRegister,{isLoading}] = useState();
+    const [adminRegister,{isLoading}] = useAdminRegisterMutation();
     const {adminInfo} = useSelector((state) =>state.adminAuth)
 
     useEffect(()=>{
@@ -32,7 +33,7 @@ const AdminRegisterScreen = () => {
         }else{
             try {
                 const res = await adminRegister({name,email,password,key}).unwrap();
-               
+                dispatch(adminSetCredentials({...res}))
                 navigate('/admin')
             } catch (err) {
                 toast.error(err?.data?.message || err.error );

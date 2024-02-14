@@ -1,39 +1,44 @@
 // import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
+import { useLoginMutation } from "../slices/usersApliSlice";
+import { setCredentials } from "../slices/authSlice";
 import Loader from "../component/Loader";
 import {toast} from 'react-toastify'
 
 const LoginScreen = () => {
-    const navigate = useNavigate()
 
-    const [email,setEmail] = useState('')
-    const [password,setPassword] = useState('')
-    const [login, {isLoading}] = useState()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-    const {userInfo} = useSelector((state) => state.auth)
+  const [email,setEmail] = useState('')
+  const [password,setPassword] = useState('')
+
+  const [login, {isLoading}] = useLoginMutation()
+
+  const {userInfo} = useSelector((state) => state.auth)
+
+  const handleRegisterClick = () => {
   
-    const handleRegisterClick = () => {
-    
-      navigate('/register');
-    };
+    navigate('/register');
+  };
 
-    const submitHandler = async() =>{
-        try {
-            const res = await login({email,password}).unwrap()
-            
-            navigate('/')
-        } catch (err) {
-          toast.error(err?.data?.message || err.error);
-        }
-      }
+  const submitHandler = async() =>{
+    try {
+        const res = await login({email,password}).unwrap()
+        dispatch(setCredentials({...res}));
+        navigate('/')
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  }
 
-      useEffect(()=>{
-        if(userInfo){
-          navigate('/')
-        }
-      },[navigate,userInfo])
+  useEffect(()=>{
+    if(userInfo){
+      navigate('/')
+    }
+  },[navigate,userInfo])
 
 
   return (
@@ -92,6 +97,6 @@ const LoginScreen = () => {
       </div>
     </div>
   );
-}
+};
 
-export default LoginScreen
+export default LoginScreen;

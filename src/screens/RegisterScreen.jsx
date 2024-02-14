@@ -1,19 +1,22 @@
 // import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
-import {   useSelector } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
+import { useRegisterMutation } from '../slices/usersApliSlice';
+import { setCredentials } from '../slices/authSlice';
 import Loader from '../component/Loader';
 import {toast} from 'react-toastify'
 
 const RegisterScreen = () => {
 
 const navigate = useNavigate()
+const dispatch = useDispatch();
 const [name,setName] =useState('')
 const [email,setEmail] =useState('')
 const [password,setPassword] =useState('')
 const [confirmPassword,setConfirmPassword] =useState('')
 
-const [register,{isLoading}] = useState();
+const [register,{isLoading}] = useRegisterMutation();
 const {userInfo} = useSelector((state)=>state.auth)
 
 useEffect(()=>{
@@ -30,6 +33,7 @@ const submitHandler = async()=>{
   }else{
       try {
           const res = await register({name,email,password}).unwrap();
+          dispatch(setCredentials({...res}))
           navigate('/')
       } catch (err) {
           toast.error(err?.data?.message || err.error );
