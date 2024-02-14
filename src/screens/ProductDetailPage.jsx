@@ -2,7 +2,7 @@
 import { useLocation } from 'react-router-dom';
 import { useState } from "react";
 import {toast} from 'react-toastify'
-import { useAddToCartMutation } from "../slices/usersApliSlice";
+import { useAddToCartMutation } from "../slices/usersApiSlice";
 
 const ProductDetailPage = () => {
 

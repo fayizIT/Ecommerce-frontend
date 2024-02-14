@@ -1,8 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/** @type {import('tailwindcss').Config} */
+import withMT from "@material-tailwind/react/utils/withMT";
 
-body {
-  background-color: #ffffff; /* Light grey color */
-  /* Add any additional styles for the body if needed */
-}
+export default withMT({
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+});

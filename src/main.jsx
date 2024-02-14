@@ -4,7 +4,7 @@ import App from './App.jsx'
 import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from 'react-router-dom'
 import './index.css'
 import UserHomeScreen from './screens/UserHomeScreen.jsx'
-import LoginScreen from './screens/LoginScren.jsx'
+import LoginScreen from './screens/LoginScreen.jsx'
 import RegisterScreen from './screens/RegisterScreen.jsx'
 import store from './store.js';
 import { PrivateRouter } from './component/PrivateRouter.jsx'

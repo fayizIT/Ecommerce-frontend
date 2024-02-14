@@ -4,7 +4,7 @@ import {
   useLoadingCartMutation,
   useChangingQuantityMutation,
   useDeletingProductMutation
-} from "../slices/usersApliSlice";
+} from "../slices/usersApiSlice";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Loader from "../component/Loader";
