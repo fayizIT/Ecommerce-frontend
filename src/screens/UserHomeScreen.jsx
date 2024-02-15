@@ -1,5 +1,7 @@
-// import React from 'react'
+
+import React from 'react'
 import Products from '../component/Products'
+import Category from '../component/Category'
 import CarouselComponent from '../component/CarouselComponent'
 
 const UserHomeScreen = () => {
@@ -7,6 +9,7 @@ const UserHomeScreen = () => {
     <>
     <CarouselComponent />
     <Products />
+    <Category />
     </>
   )
 }

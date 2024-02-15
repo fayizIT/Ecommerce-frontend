@@ -32,20 +32,12 @@ const router = createBrowserRouter(
       <Route path='/login' element={<LoginScreen />} />
       <Route path='/register' element={<RegisterScreen />} />
       <Route path='/productDetail' element={<ProductDetailPage />} />
-
-
-
-
-
       {/*================================= Private Router========================================== */}
 
 
       <Route path="" element = {<PrivateRouter />}>
         <Route path="/cart" element={<CartScreen />} /> 
       </Route>
-
-
-
 
 
 

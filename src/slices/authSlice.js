@@ -1,45 +1,24 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
-// Define an asynchronous thunk for setting credentials
-export const setCredentialsAsync = createAsyncThunk(
-  'auth/setCredentialsAsync',
-  async (payload) => {
-    localStorage.setItem('userInfo', JSON.stringify(payload));
-    return payload;
-  }
-);
-
-// Define an asynchronous thunk for logging out
-export const logoutAsync = createAsyncThunk(
-  'auth/logoutAsync',
-  async () => {
-    localStorage.removeItem('userInfo');
-  }
-);
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  userInfo: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
-};
+    userInfo : localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):null
+}
 
 const authSlice = createSlice({
-  name: 'auth',
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(setCredentialsAsync.fulfilled, (state, action) => {
-        state.userInfo = action.payload;
-      })
-      .addCase(logoutAsync.fulfilled, (state) => {
-        state.userInfo = null;
-      });
-  }
-});
+    name:'auth', 
+    initialState,
+    reducers:{
+        setCredentials:(state,action)=>{
+            state.userInfo = action.payload
+            localStorage.setItem('userInfo',JSON.stringify(action.payload))
+        },
+        logout : (state,action)=>{
+            state.userInfo = null;
+            localStorage.removeItem('userInfo')
+        }
+    }
+})
 
-export const authActions = {
-  ...authSlice.actions,
-  setCredentialsAsync,
-  logoutAsync
-};
+export  const  {setCredentials,logout} = authSlice.actions
 
-export default authSlice.reducer;
+export default authSlice.reducer

@@ -1,7 +1,7 @@
-// import React from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import {toast} from 'react-toastify'
-import { useAddToCartMutation } from "../slices/usersApliSlice";
+import { useAddToCartMutation } from "../slices/usersApiSlice";
 
 const ProductCard = ({ _id,name, description, price, image, category }) => {
 

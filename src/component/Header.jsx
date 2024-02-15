@@ -1,4 +1,4 @@
-// import React from 'react';
+import React from 'react';
 import SearchBar from './SearchBar';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
