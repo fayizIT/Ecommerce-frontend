@@ -5,7 +5,6 @@ import { useGetProductMutation } from "../slices/adminApiSlice";
 import { toast } from "react-toastify";
 import { useUnlistProductMutation } from "../slices/adminApiSlice";
 import { useListProductMutation } from "../slices/adminApiSlice";
-import Loader from "./Loader";
 
 const ProductList = () => {
   const [getProduct, { isLoading }] = useGetProductMutation();

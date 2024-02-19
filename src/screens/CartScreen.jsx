@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { useEffect, useState } from "react";
 import {
   useLoadingCartMutation,
@@ -199,7 +199,7 @@ const CartScreen = () => {
             Your cart is empty
           </h2>
           <p className="text-gray-600 mb-8">
-            Looks like you haven't added any products to your cart yet. Start
+            Looks like you havent added any products to your cart yet. Start
             shopping to fill it up!
           </p>
           <button

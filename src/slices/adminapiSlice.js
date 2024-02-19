@@ -56,7 +56,20 @@ export const adminApiSlice = apiSlice.injectEndpoints({
                 body : data
             })
         }),
+        getAllUsers: builder.query({
+            query: () => ({
+                url: `/api/admin/getAll-users`, // Adjust the URL according to your backend
+                method: 'GET',
+            }),
+        }),
+        deleteUser: builder.mutation({
+            query: (userId) => ({
+                url: `/api/admin/delete-user/${userId}`, // Adjust the URL according to your backend
+                method: 'DELETE',
+            }),
+        }),
+        
     })
 })
 
-export const  {useAdminLoginMutation , useAdminLogoutMutation , useAdminRegisterMutation, useProductAddMutation , useGetProductMutation, useUnlistProductMutation, useListProductMutation, useEditProductMutation} = adminApiSlice
+export const  {useAdminLoginMutation , useAdminLogoutMutation , useAdminRegisterMutation, useProductAddMutation , useGetProductMutation, useUnlistProductMutation, useListProductMutation, useEditProductMutation,useGetAllUsersQuery,useDeleteUserMutation} = adminApiSlice

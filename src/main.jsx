@@ -17,6 +17,8 @@ import AddProductScreen from './screens/AddProductScreen.jsx'
 import EditProductScreen from './screens/EditProductScreen.jsx'
 import AdminRegisterScreen from './screens/AdminRegisterScreen.jsx'
 import ProductDetailPage from './screens/ProductDetailPage.jsx'
+import UserListScreen from './screens/UserListScreen.jsx'
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +34,7 @@ const router = createBrowserRouter(
       <Route path='/login' element={<LoginScreen />} />
       <Route path='/register' element={<RegisterScreen />} />
       <Route path='/productDetail' element={<ProductDetailPage />} />
+      
       {/*================================= Private Router========================================== */}
 
 
@@ -48,6 +51,9 @@ const router = createBrowserRouter(
       <Route path="" element = {<AdminPrivateRouter />}>
           <Route index={true} path="/admin" element={<AdminHomeScreen />} />
           <Route path="/admin/addProduct" element={<AddProductScreen />} />
+          <Route path="/admin/users" element={<UserListScreen />} />
+         
+
           <Route path="/admin/editProduct" element={<EditProductScreen />} />
       </Route>
       <Route path="/admin/login" element={<AdminLoginScreen />} />
