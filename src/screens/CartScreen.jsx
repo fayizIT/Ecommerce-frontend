@@ -1,24 +1,19 @@
-// import React from "react";
-import { useEffect, useState } from "react";
-import {
-  useLoadingCartMutation,
-  useChangingQuantityMutation,
-  useDeletingProductMutation
-} from "../slices/usersApiSlice";
-import { toast } from "react-toastify";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useLoadingCartMutation, useChangingQuantityMutation, useDeletingProductMutation } from "../slices/usersApiSlice";
 import Loader from "../component/Loader";
-
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const CartScreen = () => {
-  
   const [productDetails, setProductDetails] = useState([]);
   const [refreshToggle, setRefreshToggle] = useState(false);
   const navigate = useNavigate();
 
   const [changeQuantity] = useChangingQuantityMutation();
   const [loadingCart, { isLoading }] = useLoadingCartMutation();
-  const [deletingProduct] = useDeletingProductMutation()
+  const [deletingProduct] = useDeletingProductMutation();
 
   const PROFILE_IMAGE_DIR_PATH = "http://localhost:5000/";
 
@@ -45,7 +40,6 @@ const CartScreen = () => {
     }
   };
 
-  // Function to calculate subtotal
   const calculateSubtotal = () => {
     let subtotal = 0;
     if (productDetails.products) {
@@ -56,16 +50,38 @@ const CartScreen = () => {
     return subtotal;
   };
 
-  const deleteHandleClick = async(productId) => {
-    
-    const isConfirmed = window.confirm("Do you want to delete this product?");
+  const deleteHandleClick = async (productId) => {
+    const isConfirmed = await showDeleteConfirmation();
     if (isConfirmed) {
-      await deletingProduct({productId}).unwrap()
-      toast.success("Product Deleted");
-      // Toggle the dummy state to trigger a re-render
-      setRefreshToggle(!refreshToggle);
-      console.log("Product deleted!");
+      try {
+        await deletingProduct({ productId }).unwrap();
+        toast.success("Product Deleted");
+        // Toggle the dummy state to trigger a re-render
+        setRefreshToggle(!refreshToggle);
+        console.log("Product deleted!");
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      }
     }
+  };
+
+  const showDeleteConfirmation = () => {
+    return new Promise((resolve) => {
+      confirmAlert({
+        title: 'Confirm Deletion',
+        message: 'Are you sure you want to delete this product?',
+        buttons: [
+          {
+            label: 'Yes',
+            onClick: () => resolve(true)
+          },
+          {
+            label: 'No',
+            onClick: () => resolve(false)
+          }
+        ]
+      });
+    });
   };
 
   return (
@@ -148,14 +164,14 @@ const CartScreen = () => {
                             ₹{product.productId.price * product.quantity}
                           </td>
                           <td className="py-4" onClick={() => deleteHandleClick(product.productId._id)}>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              strokeWidth={1.5}
-                              stroke="currentColor"
-                              className="w-6 h-6 hover:text-red-500"
-                            >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-6 h-6 hover:text-red-500 cursor-pointer"
+        >
                               <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"

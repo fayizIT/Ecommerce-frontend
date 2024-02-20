@@ -1,23 +1,38 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from 'react-router-dom'
-import './index.css'
-import UserHomeScreen from './screens/UserHomeScreen.jsx'
-import LoginScreen from './screens/LoginScreen.jsx'
-import RegisterScreen from './screens/RegisterScreen.jsx'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
+import { Provider } from 'react-redux';
+
+
+import App from './App.jsx';
 import store from './store.js';
+
+import './index.css'
+
+
+
+import UserHomeScreen from './screens/UserHomeScreen.jsx';
+import LoginScreen from './screens/LoginScreen.jsx';
+import RegisterScreen from './screens/RegisterScreen.jsx';
+import CartScreen from './screens/CartScreen.jsx';
+import ProductDetailPage from './screens/ProductDetailPage.jsx';
+
+
+import AdminHomeScreen from './screens/AdminHomeScreen.jsx';
+import AdminLoginScreen from './screens/AdminLoginScreen.jsx';
+import AdminRegisterScreen from './screens/AdminRegisterScreen.jsx';
+import AddProductScreen from './screens/AddProductScreen.jsx';
+import EditProductScreen from './screens/EditProductScreen.jsx';
+import UserListScreen from './screens/UserListScreen.jsx';
+
+
+
 import { PrivateRouter } from './component/PrivateRouter.jsx'
-import {Provider} from 'react-redux'
-import CartScreen from './screens/CartScreen.jsx'
-import AdminHomeScreen from './screens/AdminHomeScreen.jsx'
 import { AdminPrivateRouter } from './component/AdminPrivateRouter.jsx'
-import AdminLoginScreen from './screens/AdminLoginScreen.jsx'
-import AddProductScreen from './screens/AddProductScreen.jsx'
-import EditProductScreen from './screens/EditProductScreen.jsx'
-import AdminRegisterScreen from './screens/AdminRegisterScreen.jsx'
-import ProductDetailPage from './screens/ProductDetailPage.jsx'
-import UserListScreen from './screens/UserListScreen.jsx'
+
+
+
+
 
 
 const router = createBrowserRouter(
