@@ -5,7 +5,7 @@ import { useAddToCartMutation } from "../slices/usersApiSlice";
 import 'react-toastify/dist/ReactToastify.css';
 
 const ProductCard = ({ _id, name, description, price, image, category }) => {
-  const PROFILE_IMAGE_DIR_PATH = `http://localhost:5000/${image}`;
+  const PROFILE_IMAGE_DIR_PATH = `https://demo-backend.fayizcj.in/golbalSearch/products/${image}`;
   const navigate = useNavigate();
   const [addToCart] = useAddToCartMutation();
 

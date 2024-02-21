@@ -15,7 +15,7 @@ const CartScreen = () => {
   const [loadingCart, { isLoading }] = useLoadingCartMutation();
   const [deletingProduct] = useDeletingProductMutation();
 
-  const PROFILE_IMAGE_DIR_PATH = "http://localhost:5000/";
+  const PROFILE_IMAGE_DIR_PATH = "https://demo-backend.fayizcj.in/golbalSearch/products";
 
   useEffect(() => {
     const getCartDetails = async () => {
