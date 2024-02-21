@@ -1,4 +1,3 @@
-import React from "react";
 import ProductCard from "./ProductCard";
 import { useState, useEffect } from "react";
 import { useGetListedProductsMutation } from "../slices/usersApiSlice";
